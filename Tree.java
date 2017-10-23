@@ -2,19 +2,49 @@ package Node;
 
 public class Tree {
 	Node root;
-	
+	public class Node {
+		Key key;
+		Value value;
+		Node left;
+		Node right;
+		
+	public class Key{
+		int key;
+		public int compareTo(int b) {
+			if(key<b) {
+				return -1;
+			}
+			else if(key>b) {
+				return 1;
+			}
+			else {
+				return 0;
+			}
+		}
+		
+	}
+	public class Value{int value;}
+	public Node(Key key,Value value) {
+		this.left=null;
+		this.right=null;
+		this.key=key;
+		this.value=value;
+	}
 
-public Tree() {
+	}
+
+
+    public Tree() {
 	this.root=null;
-}
-public void put(int key,int val) {
+    }
+    public void put(Tree.Node.Key key,Tree.Node.Value val) {
 	root=add(root,key,val);
-}
-private Node add(Node x,int key,int val) {
+    }
+    private Node add(Node x,Tree.Node.Key key,Tree.Node.Value val) {
 	if(x==null) {
 		return new Node(key,val);
 	}
-	int cmp=key.compareTo(x.key);
+	int cmp=key.compareTo(x.key.key);
 	if(cmp>0) {
 		x.right=add(x.right,key,val);
 	}
@@ -26,10 +56,10 @@ private Node add(Node x,int key,int val) {
 	}
 	return x;
 }
-public Node find(int key) {
+public Node find(Tree.Node.Key key) {
 	Node x=root;
 	while(x!=null) {
-		int cmp=key.compareTo(x.key);
+		int cmp=key.compareTo(x.key.key);
 		if(cmp<0) {
 			x=x.left;
 		}
@@ -42,10 +72,10 @@ public Node find(int key) {
 	}
 	return null;
 }
-public void update(int key,int value) {
+public void update(Tree.Node.Key key,int value) {
 	Node x=root;
 	while(x!=null) {
-		int cmp=key.compareTo(x.key);
+		int cmp=key.compareTo(x.key.key);
 		if(cmp<0) {
 			x=x.left;
 		}
@@ -53,18 +83,18 @@ public void update(int key,int value) {
 			x=x.right;
 		}
 		else {
-			x.value=value;
+			x.value.value=value;
 		}
 	}
-	return null;
+	
 }
-public void delete(int key) {
+public void delete(Tree.Node.Key key) {
 	Node current=root;
 	Node parent=root;
 	boolean isleft=true;
-	while(current.key!=key) {
+	while(current.key.key!=key.key) {
 		parent=current;
-		int  cmp=key.compareTo(current.key);
+		int  cmp=key.compareTo(current.key.key);
 		if(cmp<0) {
 			isleft=true;
 			current=current.left;
