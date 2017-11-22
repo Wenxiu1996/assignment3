@@ -1,15 +1,42 @@
 package Node;
 
 public class Tree {
-	Node root;
-	public class Node {
-		Key key;
-		Value value;
-		Node left;
-		Node right;
-		
-	public class Key{
-		int key;
+	private Node root;
+	private class Node {
+		private Key key;
+		private Value value;
+		private Node left;
+		private Node right;
+		public Key getKey() {
+			return key;
+		}
+		public void setKey(Key key) {
+			this.key=key;
+		}
+		public Value getValue() {
+			return value;
+		}
+		public void setValue(Value value) {
+			this.value=value;
+		}
+		public Node(Key key,Value value) {
+			this.left=null;
+			this.right=null;
+			this.key=key;
+			this.value=value;
+		}
+	}
+	private class Key{
+		private int key;
+		public int getKey() {
+			return key;
+		}
+		public void setKey(int key) {
+			this.key=key;
+		}
+		public Key(int key) {
+			this.key=key;
+		}
 		public int compareTo(int b) {
 			if(key<b) {
 				return -1;
@@ -24,23 +51,18 @@ public class Tree {
 		
 	}
 	public class Value{int value;}
-	public Node(Key key,Value value) {
-		this.left=null;
-		this.right=null;
-		this.key=key;
-		this.value=value;
-	}
+	
 
-	}
+	
 
 
     public Tree() {
 	this.root=null;
     }
-    public void put(Tree.Node.Key key,Tree.Node.Value val) {
+    public void put(Key key,Value val) {
 	root=add(root,key,val);
     }
-    private Node add(Node x,Tree.Node.Key key,Tree.Node.Value val) {
+    private Node add(Node x,Key key,Value val) {
 	if(x==null) {
 		return new Node(key,val);
 	}
@@ -56,7 +78,7 @@ public class Tree {
 	}
 	return x;
 }
-public Node find(Tree.Node.Key key) {
+public Value find(Key key) {
 	Node x=root;
 	while(x!=null) {
 		int cmp=key.compareTo(x.key.key);
@@ -67,12 +89,12 @@ public Node find(Tree.Node.Key key) {
 			x=x.right;
 		}
 		else {
-			return x;
+			return x.value;
 		}
 	}
 	return null;
 }
-public void update(Tree.Node.Key key,int value) {
+public void update(Key key,Value value) {
 	Node x=root;
 	while(x!=null) {
 		int cmp=key.compareTo(x.key.key);
@@ -83,12 +105,12 @@ public void update(Tree.Node.Key key,int value) {
 			x=x.right;
 		}
 		else {
-			x.value.value=value;
+			x.value=value;
 		}
 	}
 	
 }
-public void delete(Tree.Node.Key key) {
+public void delete(Key key) {
 	Node current=root;
 	Node parent=root;
 	boolean isleft=true;
